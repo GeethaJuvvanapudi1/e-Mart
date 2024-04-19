@@ -4,11 +4,12 @@ const Mobiles = () => {
   const firstFiveImages=mobileData.slice(0,6)
   return (
     <>
-    <div className="protitle">
+    <div className="proTitle">
     <h2>Mobiles</h2>
+
     </div>
-    
-    <div className='proSection'>
+   
+     <div className='proSection'>
       {
         firstFiveImages.map((item)=>
       {
@@ -23,11 +24,9 @@ const Mobiles = () => {
       
     </div>
     
-    
-    
-    
     </>
+   
   )
 }
 
-export default Mobiles
+export default Mobiles;

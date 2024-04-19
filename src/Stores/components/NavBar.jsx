@@ -1,5 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import '../../App.css';
+
 
 const NavBar = () => {
   return (
@@ -10,9 +12,12 @@ const NavBar = () => {
                 <input type="textplace" placeholder='search...' /></div>
                 <div className="user">
                     <div className="user-Details">
-                        SignIn/SignUp
+                        SignIn/SignUp</div>
+                        <Link to='/cart'>
                         <div className="cart">Cart  </div>
-                    </div>
+
+                        </Link>
+                    
 
                 </div>
             </div>
@@ -48,10 +53,10 @@ const NavBar = () => {
                    <Link to='Tv'>
                    <li>Tv</li>
                    </Link>
-                    <Link to='Spekaers'>
+                    <Link to='Speakers'>
                     <li>Speakers</li>
                     </Link>
-                    <Link to='Refrigerators'>
+                    <Link to='fridge'>
                     <li>Refrigerators</li>
                     </Link>
                     <Link to='Books'>

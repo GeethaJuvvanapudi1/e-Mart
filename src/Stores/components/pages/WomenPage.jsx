@@ -1,24 +1,68 @@
-import React from 'react';
-import NavBar from '../NavBar';
-import { womanData } from '../../data/woman';
+import React, { useState } from 'react'
+import { womanData } from '../../data/woman'
+import NavBar from '../NavBar'
+import { Link } from 'react-router-dom'
 
-const WomenPage = () => {
-  return (
-    <>
-      <NavBar />
-      <div className="pageSection">
-        {womanData.map((item) => (
-          <div key={item.id}> {/* Add a unique key for each item */}
-            <div className="pageImage">
-              <img src={item.image} alt="" />
+const WomanPage = () => {
+
+    const [selectedProduct, setSelectedProduct] = useState([])
+
+    const companyHandler=(mango)=>{
+            if(selectedProduct.includes(mango)){
+                setSelectedProduct(selectedProduct.filter(item => item !== mango))
+            }else{
+                setSelectedProduct([...selectedProduct, mango]) 
+            }
+    }
+
+
+    const filteredProduct = selectedProduct.length===0?
+        womanData : womanData.filter((orange)=>selectedProduct.includes(orange.brand))
+
+return (
+<>
+<NavBar />
+<div className="fullpage">
+    
+<div className="pro-selected">
+
+{womanData.map((phone)=>{
+    return(
+        <div className='pro-input'>
+            <label >
+                <input type="checkbox" 
+                checked = {selectedProduct.includes(phone.brand)}
+                onChange={()=>companyHandler(phone.brand)}
+                />
+                {phone.brand}
+            </label>
+        </div>
+    )
+})}
+
+</div>
+
+<div className='pageSection'>
+    {filteredProduct.map((item)=>{
+        return(
+            <div>
+
+            <Link to={`/woman/${item.id}`}>
+                <div className="pageImg">
+                    <img src={item.image} alt="" />
+                </div>
+            </Link>
+                <div className="proModel">
+                    {item.brand}, {item.model}
+                </div>
             </div>
-            <div className="proModel">
-              {item.company}, {item.model} {/* Render specific properties */}
-            </div>
-          </div>
-        ))}
-      </div>
-    </>
-  );
-};
-export default WomenPage;
+        )
+    })}
+
+ </div>
+</div>
+</>
+  )
+}
+
+export default WomanPage

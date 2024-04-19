@@ -16,6 +16,7 @@ import BooksPage from './Stores/components/pages/BooksPage';
 import KitchenPage from './Stores/components/pages/KitchenPage'
 import SpeakersPage from './Stores/components/pages/SpeakersPage'
 import MobileSingle from './singles/MobileSingle';
+import UserCart from './Stores/userCart';
 
 const App = () => {
   return (
@@ -36,6 +37,7 @@ const App = () => {
           <Route path='/fridge'element={<RefrigeratorPage/>}/>
           <Route path='/Books'element={<BooksPage/>}/>
           <Route path='/Mobiles/:id'element={<MobileSingle/>}/>
+          <Route path='/Cart' element={<UserCart/>}/>
           </Routes>
       </Router>
     </div>

@@ -1,25 +1,70 @@
-import React from 'react';
-import { mobileData } from '../../data/mobiles';
-import NavBar from '../NavBar';
+import React, { useState } from 'react'
+import { mobileData } from '../../data/mobiles'
+import NavBar from '../NavBar'
+import { Link } from 'react-router-dom'
+
+
 
 const MobilePage = () => {
-  return (
-    <>
-      <NavBar />
-      <div className="pageSection">
-        {mobileData.map((item) => (
-          <div key={item.id}> {/* Add a unique key for each item */}
-            <div className="pageImage">
-              <img src={item.image} alt="" />
-            </div>
-            <div className="proModel">
-              {item.company}, {item.model} {/* Render specific properties */}
-            </div>
-          </div>
-        ))}
-      </div>
-    </>
-  );
-};
 
-export default MobilePage;
+    const [selectedProduct, setSelectedProduct] = useState([])
+
+    const companyHandler=(mango)=>{
+            if(selectedProduct.includes(mango)){
+                setSelectedProduct(selectedProduct.filter(item => item !== mango))
+            }else{
+                setSelectedProduct([...selectedProduct, mango]) 
+            }
+    }
+
+
+    const filteredProduct = selectedProduct.length===0?
+        mobileData : mobileData.filter((orange)=>selectedProduct.includes(orange.company))
+
+return (
+<>
+<NavBar />
+<div className="fullpage">
+    
+<div className="pro-selected">
+
+{mobileData.map((phone)=>{
+    return(
+        <div className='pro-input'>
+            <label >
+                <input type="checkbox" 
+                checked = {selectedProduct.includes(phone.company)}
+                onChange={()=>companyHandler(phone.company)}
+                />
+                {phone.company}
+            </label>
+        </div>
+    )
+})}
+
+</div>
+
+<div className='pageSection'>
+    {filteredProduct.map((item)=>{
+        return(
+            <div>
+
+            <Link to={`/mobiles/${item.id}`}>
+                <div className="pageImg">
+                    <img src={item.image} alt="" /><br />
+                </div>
+            </Link>
+            <div className="proModel">
+                    {item.company}, {item.model}
+                </div>
+            </div>
+        )
+    })}
+
+ </div>
+</div>
+</>
+  )
+}
+
+export default MobilePage
